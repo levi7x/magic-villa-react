@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 const VillasListing = () => {
   const [villaData, villaDataChange] = useState(null);
@@ -21,6 +22,9 @@ const VillasListing = () => {
           <h2>Villas listing</h2>
         </div>
         <div className="card-body">
+            <div>
+                <Link to="/villa/create" className="btn btn-success">Add new</Link>
+            </div>
           <table className="table table-bordered">
             <thead className="bg-dark text-white">
               <tr>
