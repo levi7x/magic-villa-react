@@ -44,7 +44,7 @@ const VillaCreate = () => {
       <div className="row">
         <div className="offset-lg-3 col-lg-6">
           <form className="container" onSubmit={handleSubmit}>
-            <div className="card" style={{ textAlign: "left" }}>
+            <div className="card" style={{ "textAlign": "left" }}>
               <div className="card-title">
                 <h2>Create villa</h2>
               </div>

@@ -1,8 +1,31 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const VillasListing = () => {
   const [villaData, villaDataChange] = useState(null);
+  const navigate = useNavigate();
+
+  const LoadDetail = (id) => {
+    navigate("/villa/detail/" + id);
+  };
+  const LoadEdit = (id) => {
+    navigate("/villa/edit/" + id);
+  };
+  const LoadRemove = (id) => {
+    if (window.confirm("Do you want to remove villa ?")) {
+      fetch("https://localhost:7169/api/VillaAPI/" + id, {
+        method: "DELETE",
+      })
+        .then((res) => {
+          alert("removed succesully");
+          window.location.reload();
+        })
+        .catch((err) => {
+          console.log(err.message);
+        });
+    }
+  };
+
   useEffect(() => {
     fetch("https://localhost:7169/api/VillaAPI")
       .then((res) => {
@@ -22,9 +45,11 @@ const VillasListing = () => {
           <h2>Villas listing</h2>
         </div>
         <div className="card-body">
-            <div>
-                <Link to="/villa/create" className="btn btn-success">Add new</Link>
-            </div>
+          <div>
+            <Link to="/villa/create" className="btn btn-success">
+              Add new
+            </Link>
+          </div>
           <table className="table table-bordered">
             <thead className="bg-dark text-white">
               <tr>
@@ -48,9 +73,30 @@ const VillasListing = () => {
                     <td>{item.occupancy}</td>
                     <td>{item.sqft}</td>
                     <td>
-                      <a className="btn btn-success">Edit</a>
-                      <a className="btn btn-danger">Remove</a>
-                      <a className="btn btn-success">Details</a>
+                      <a
+                        onClick={() => {
+                          LoadEdit(item.id);
+                        }}
+                        className="btn btn-success"
+                      >
+                        Edit
+                      </a>
+                      <a
+                        onClick={() => {
+                          LoadRemove(item.id);
+                        }}
+                        className="btn btn-danger"
+                      >
+                        Remove
+                      </a>
+                      <a
+                        onClick={() => {
+                          LoadDetail(item.id);
+                        }}
+                        className="btn btn-success"
+                      >
+                        Details
+                      </a>
                     </td>
                   </tr>
                 ))}
