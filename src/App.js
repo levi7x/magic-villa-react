@@ -1,23 +1,22 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import VillasListing from "./components/VillasListing";
+import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
+
+/* fetch("https://localhost:7169/api/VillaAPI")
+.then((res) => res.json())
+.then((data) => {
+  console.log(data);
+}); */
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>REACT VILLAS</h1>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<VillasListing />}></Route>
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }
